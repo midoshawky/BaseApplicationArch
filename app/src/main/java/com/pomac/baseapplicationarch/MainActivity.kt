@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import com.pomac.baseapplicationarch.domain.model.ResultState
 import com.pomac.baseapplicationarch.ui.theme.BaseApplicationArchTheme
+import com.pomac.baseapplicationarch.ui.view.screens.MainScreen
 import com.pomac.baseapplicationarch.ui.viewmodels.SampleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,35 +31,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BaseApplicationArchTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-
-                    Column(verticalArrangement = Arrangement.Center , horizontalAlignment = Alignment.CenterHorizontally) {
-                        Greeting()
-                    }
-                }
-            }
+                MainScreen()
         }
     }
 }
 
-@Composable
-fun Greeting(viewModel: SampleViewModel = hiltViewModel()) {
-    LaunchedEffect(key1 = null){
-        viewModel.getSampleData()
-    }
-    Text(text = "${viewModel.dataFlow.collectAsState(initial = ResultState.Initial).value}")
-}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun DefaultPreview() {
     BaseApplicationArchTheme {
-        Column(verticalArrangement = Arrangement.Center , horizontalAlignment = Alignment.CenterHorizontally) {
-            Greeting()
-        }
+        MainScreen()
     }
+}
 }
